@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8E6E3"/>
+      <stop offset="50%" stop-color="#C9A227"/>
+      <stop offset="100%" stop-color="#8B7355"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B8956C"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+  </defs>
+  <circle cx="52" cy="52" r="34" stroke="url(#frameGrad)" stroke-width="5" fill="none"/>
+  <path d="M78 78 L98 98" stroke="url(#frameGrad)" stroke-width="6" stroke-linecap="round"/>
+  <rect x="38" y="58" width="8" height="18" rx="1" fill="url(#goldGrad)"/>
+  <rect x="48" y="50" width="8" height="26" rx="1" fill="url(#goldGrad)"/>
+  <rect x="58" y="42" width="8" height="34" rx="1" fill="url(#goldGrad)"/>
+  <path d="M42 38 L72 28 L88 18" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M88 18 L88 32 M88 18 L74 18" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

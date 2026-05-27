@@ -19,8 +19,14 @@ export function IdentityForm() {
     window.setTimeout(() => setToast((t) => ({ ...t, visible: false })), 4500);
   }, []);
 
-  const updateField = (id: keyof IdentityFormData, value: string) => {
-    setForm((prev) => ({ ...prev, [id]: value }));
+    const updateField = (
+    id: keyof IdentityFormData,
+    value: string | File[]
+    ) => {
+     setForm((prev) => ({
+     ...prev,
+    [id]: value,
+    }));
     if (touched[id]) {
       const field = FORM_FIELDS.find((f) => f.id === id)!;
       setErrors((prev) => {
@@ -64,10 +70,21 @@ export function IdentityForm() {
     }
 
     try {
+      const formData = new FormData();
+
+      Object.entries(form).forEach(([key, value]) => {
+      if (key === "archivos") {
+      (value as File[]).forEach((file) => {
+      formData.append("archivos", file);
+      });
+      } else {
+       formData.append(key, value as string);
+       }
+      });
+
       const res = await fetch("/api/onboarding", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      method: "POST",
+      body: formData,
       });
 
       if (!res.ok) {
@@ -106,14 +123,40 @@ export function IdentityForm() {
 
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8 px-6 pb-10 md:px-10 md:pb-14">
               {FORM_FIELDS.map((field) => (
-                <FormField
-                  key={field.id}
-                  field={field}
-                  value={form[field.id]}
-                  error={errors[field.id]}
-                  onChange={(v) => updateField(field.id, v)}
-                  onBlur={() => blurField(field.id)}
-                />
+                <div key={field.id}>
+  {field.type === "file" ? (
+    <div className="flex flex-col gap-2">
+      <label className="text-sm font-medium text-navy-900">
+        {field.label}
+      </label>
+
+      <input
+        type="file"
+        multiple
+        accept="image/*,.pdf,.doc,.docx"
+        onChange={(e) => {
+          const files = Array.from(e.target.files || []);
+          updateField(field.id, files);
+        }}
+        className="rounded border border-gray-300 p-3"
+      />
+
+      {errors[field.id] && (
+        <span className="text-sm text-red-500">
+          {errors[field.id]}
+        </span>
+      )}
+    </div>
+  ) : (
+    <FormField
+      field={field}
+      value={form[field.id] as string}
+      error={errors[field.id]}
+      onChange={(v) => updateField(field.id, v)}
+      onBlur={() => blurField(field.id)}
+    />
+  )}
+</div>
               ))}
 
               <button

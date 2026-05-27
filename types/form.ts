@@ -1,4 +1,4 @@
-export type FormFieldType = "text" | "textarea" | "url";
+export type FormFieldType = "text" | "textarea" | "url" | "file";
 
 export interface FormFieldConfig {
   id: keyof IdentityFormData;
@@ -19,6 +19,7 @@ export interface IdentityFormData {
   objetivo: string;
   publico: string;
   destacar: string;
+  archivos: File[];
 }
 
 export type FormErrors = Partial<Record<keyof IdentityFormData, string>>;

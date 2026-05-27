@@ -37,6 +37,14 @@ export const FORM_FIELDS: FormFieldConfig[] = [
     placeholder: "Pegá acá el link de Drive configurado como público...",
     validate: "drive",
   },
+
+  {
+  id: "archivos",
+  label: "Adjuntar fotos o archivos",
+  type: "file",
+  placeholder: "",
+  },
+
   {
     id: "colores",
     label: "Preferencias de identidad visual (colores o tonos corporativos)",

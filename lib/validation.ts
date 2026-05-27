@@ -72,4 +72,5 @@ export const EMPTY_FORM: IdentityFormData = {
   objetivo: "",
   publico: "",
   destacar: "",
+  archivos: [],
 };

@@ -55,7 +55,12 @@ export function validateForm(
   const errors: FormErrors = {};
 
   for (const field of fields) {
-    const error = validateField(field, data[field.id]);
+    const value = data[field.id];
+
+    const error =
+    typeof value === "string"
+    ? validateField(field, value)
+    : undefined;
     if (error) errors[field.id] = error;
   }
 

@@ -36,7 +36,7 @@ export function IdentityForm() {
         typeof value === "string"
         ? validateField(field, value)
         : undefined;
-        
+
         if (err) next[id] = err;
         else delete next[id];
         return next;
@@ -47,8 +47,13 @@ export function IdentityForm() {
   const blurField = (id: keyof IdentityFormData) => {
     setTouched((prev) => ({ ...prev, [id]: true }));
     const field = FORM_FIELDS.find((f) => f.id === id)!;
-    const err = validateField(field, form[id]);
-    setErrors((prev) => {
+    const value = form[id];
+
+    const err =
+     typeof value === "string"
+     ? validateField(field, value)
+     : undefined;
+      setErrors((prev) => {
       const next = { ...prev };
       if (err) next[id] = err;
       else delete next[id];

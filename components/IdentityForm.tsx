@@ -31,7 +31,12 @@ export function IdentityForm() {
       const field = FORM_FIELDS.find((f) => f.id === id)!;
       setErrors((prev) => {
         const next = { ...prev };
-        const err = validateField(field, value);
+
+        const err =
+        typeof value === "string"
+        ? validateField(field, value)
+        : undefined;
+        
         if (err) next[id] = err;
         else delete next[id];
         return next;
